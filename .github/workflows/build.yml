@@ -1,9 +1,8 @@
-name: "Build"
+name: Build Release
 on:
   release:
     types: [created]
 
-name: Build Release
 jobs:
   release-linux-386:
     name: release linux/386
