@@ -12,19 +12,24 @@ import (
 var COMMANDS = map[string]Command{};
 
 func main() {
+  // Register the commands to COMMANDS map
   RegisterCommands();
 
   fmt.Println("Logging in...");
 
+  // Initialize discord class
   dg, err := discordgo.New(fmt.Sprintf("Bot %s", TOKEN));
   if err != nil {
     fmt.Println("Error with discordgo", err);
     return;
   }
 
+  // Add event handlers
   dg.AddHandler(OnMessage);
   dg.AddHandler(OnReady);
+  dg.AddHandler(OnReactAdd);
 
+  // Connect to websocket
   err = dg.Open();
   if err != nil {
     fmt.Println("Error connecting to discord", err);

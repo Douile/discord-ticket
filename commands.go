@@ -51,8 +51,23 @@ var CommandHelp Command = Command{
   Help: "Get help with other commands",
 };
 
+var ReactTest Command = Command{
+  Call: func(session *discordgo.Session,message *discordgo.MessageCreate) {
+    res, err := session.ChannelMessageSendEmbed(message.ChannelID, &discordgo.MessageEmbed{
+      Title: "Reaction test",
+      Color: 0xff0000,
+    });
+    if err != nil { return; }
+    session.MessageReactionAdd(res.ChannelID, res.ID, "📧");
+    SHOULD_RESPOND[res.ID] = res.ChannelID;
+  },
+  Check: CheckNop,
+  Help: "Test reactions",
+};
+
 func RegisterCommands() {
   COMMANDS["hello"] = CommandHello;
   COMMANDS["help"] = CommandHelp;
   COMMANDS["info"] = CommandInfo;
+  COMMANDS["reacttest"] = ReactTest;
 }
