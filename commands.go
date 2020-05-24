@@ -36,7 +36,7 @@ var CommandHelp Command = Command{
   Call: func(session *discordgo.Session,message *discordgo.MessageCreate) {
     helpMessage := "";
     for k, v := range COMMANDS {
-      helpMessage += fmt.Sprintf("`%s%s` - %s\n", PREFIX, k, v.Help);
+      helpMessage += fmt.Sprintf("`%s%s` - %s\n", CONFIG.prefix, k, v.Help);
     }
 
     session.ChannelMessageSendEmbed(message.ChannelID, &discordgo.MessageEmbed{

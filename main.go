@@ -18,7 +18,7 @@ func main() {
   fmt.Println("Logging in...");
 
   // Initialize discord class
-  dg, err := discordgo.New(fmt.Sprintf("Bot %s", TOKEN));
+  dg, err := discordgo.New(fmt.Sprintf("Bot %s", CONFIG.token));
   if err != nil {
     fmt.Println("Error with discordgo", err);
     return;
